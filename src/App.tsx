@@ -1,14 +1,13 @@
 import React from 'react';
-import Loadable from 'react-loadable';
-import Loading from './Loading';
+import withLoading from './withLoading';
 
-const Hello = Loadable({
-  loader: () =>
-    new Promise<typeof import('./Hello')>(resolve =>
-      setTimeout(() => resolve(import('./Hello')), 2000),
-    ),
-  loading: Loading,
-});
+// You will probably be lazy loading page components which usually don't accept props
+const Hello = withLoading(() => import('./Hello'));
+
+// const Hello = Loadable({
+//   loader: () => import('./Hello'),
+//   loading: Loading,
+// });
 
 const App: React.FC = () => {
   return (
